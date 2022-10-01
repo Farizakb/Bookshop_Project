@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='asset/style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick-1.8.1/slick-1.8.1/slick/slick.css') }}"/>
+   
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick-1.8.1/slick-1.8.1/slick/slick-theme.css') }}"/>
+
+    <style>
+      .items img{
+        width: 150px;
+        height: 250px;
+        
+      }
+
+     
+    </style>
+    <script src="https://kit.fontawesome.com/7e0f8b7b6a.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    
+    <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:rgb(16, 137, 137);">
+        <div class="container">
+        <a href="/" style="text-decoration:none;"><h5 id="book-shop" style="font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;"> <b class="text-light "> KITAB MAGAZASI </b></h5></a>
+            <form class="d-flex" role="search" >
+
+
+
+              <span class="badge text-bg-danger" id="kitab_sayi" style="padding: 1.35em 0.5em;">2</span>
+
+            <ul class="navbar-nav me-3 mb-2 mb-lg-0 "  id="cart">
+              
+              <li class="nav-item dropdown">
+                <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+                
+                <ul id="cart_dd" class="dropdown-menu ps-2"  aria-labelledby="navbarDropdown">
+                
+                  <li>
+                    <p>
+                    <span class="text-danger border-0" onclick="deleteF(this);">X</span>
+                      1984: (<span id="q_1">16</span>Azn)</li>
+                    </p>
+                  </li>
+                  <li> 
+                    <p>
+                    <span class="text-danger border-0" onclick="deleteF(this);">X</span>
+                   Sefiller: (<span id="q_2">21</span>Azn)
+                  </p>
+                  </li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Cemi:  (<Span id="result">37</Span>Azn)</a></li>
+                
+                </ul>
+              </li>
+              </ul>
+              
+
+
+              
+                <a class="navbar-brand" style="opacity: 0.5;" href="/  ">Ana Sehife</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link " aria-current="page" href="#">Haqqimizda</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Kateqoriaklar</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link  active" href="/prodcut/">Ayin kitabi</a>
+                    </li>
+                      <li class="nav-item dropdown">
+                        <a class="nav-link  dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Istifadeci
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="#">Action</a></li>
+                          <li><a class="dropdown-item" href="#">Another action</a></li>
+                          <li><hr class="dropdown-divider"></li>
+                          <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                      </li>
+                  </ul>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+
+
+      <div class="container">
+          <div class="row">
+
+
+
+
+
+              <div class="col-2"></div>
+
+
+
+
+
+
+              <div class="col-8">
+                <div class="row mt-5" >
+
+
+
+                    <div class="col-4">
+                      <img src="{{data.image_url}}" alt="..." style="width: 100%;">
+
+                    </div>
+
+
+
+
+
+
+                    <div class="col-8">
+                    <div class="text-end">
+                      <h2 >{{data.author}}-{{data.title}}</h2>
+          
+                      <p class="text-success">
+                          {{data.price}} <span class="text-danger text-decoration-line-through">{{data["K-qiymet"]}}</span>
+                      </p>
+                 
+          
+          
+                  <div >
+          
+          
+          
+                          
+                      <p>
+                        {{data.description}}
+                          
+                      </p>
+                     
+                      <i id="Like" class="fa-regular fa-thumbs-up fa-2xl m-1 " onclick="likeButton();"></i>
+
+                      
+                      <i id="Heart" class="fa-solid fa-heart fa-2xl m-1" style="color: black;" 
+                      onclick="heartButton ();" ></i>      
+                      
+                      
+                      <button id="Add_sebet" onclick="addCart();"  type="button" class="btn btn-primary"
+                        style="--bs-btn-padding-y: .5rem; --bs-btn-padding-x: .8rem;  --bs-btn-font-size: .75rem; background-color:darkcyan ;">
+                       Sebete elave et
+                      </button>
+                    </div>
+                 </div>
+
+
+                    <br>
+                    <br>
+                  
+                  
+                  
+                  </div>
+                  <br>
+                  <br>
+                  
+              </div>
+              <div id="alert_word" class="alert alert-warning text-center"  role="alert" >
+                  Bu kitabdan cemi  <span>{{data.stock}}</span>  eded qalib
+              </div>
+          
+          
+              <table class="table table-striped">
+                  <tr>
+                      <th>#</th>
+                      <th>Xususiyetler</th>
+                      <th>
+                          Aciqlama
+                      </th>
+                  </tr>
+                  <tr>
+                      <td><b>1</b></td>
+                      <td>
+                          Dil
+                      </td>
+                      <td>
+                          {{data.language}}
+                      </td>
+                  </tr>
+                  <tr>
+                      <td><b>2</b></td>
+                      <td>
+                          Janr
+                      </td>
+                      <td>
+                        {{data.genre}}
+                      </td>
+                  </tr>
+          
+                  <tr>
+                      <td><b>3</b></td>
+                      <td>
+                          Muellif
+                      </td>
+                      <td>
+                          {{data.author}}
+                      </td>
+                  <tr>
+                      <td><b>4</b></td>
+                      <td>
+                          Nesriyyat
+                      </td>
+                      <td>
+                          Qanun Nesriyyat
+                      </td>
+                  </tr>
+                  </tr>
+                </table>
+                <br>
+          
+          
+          
+                  <div>
+                  <h3 class="Heading text-center">Sherh yaz </h3>
+                  <div class="mb-3">
+                      <form action="" method="POST">
+                      {{ form.csrf_token }}
+                      <label for="formGroupExampleInput" class="form-label">{{form.full_name.label}}</label>
+                      {{form.full_name}}
+                      {{form.full_name.errors}}
+                        <br>
+                      <label for="">{{form.dil.label}}
+                      </label>
+          
+                      {{form.dil}}
+                      <br>
+                        <label for="customRange1" class="form-label">{{form.qiymetlendirem.label}}</label>
+                        {{form.qiymetlendirem}}
+                        <br>
+                          <label for="exampleFormControlTextarea1" class="form-label">{{form.message.label}}</label>
+                          {{form.message}}
+                          <div class="form-check form-switch">
+                              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
+                              <label class="form-check-label" for="flexSwitchCheckChecked">Bu kitabi oxumusunuz?</label>
+                              <br>
+                              <br>
+                          </div>
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                          </form>
+                        </div>
+                    </div>
+                    <div>
+                    <h3>
+                      Yorumlar
+                    </h3>
+
+                    {% for data in datas %}
+                    <p>{{data.full_name}}</p>
+                    <p>Ulduz Sayi : {{data.qiymetlendirme}}</p>
+                    <p>Aciqlama: {{data.message}}</p>
+                    <hr>
+                    {% endfor %}
+                  </div>
+                  </div>
+          
+
+
+
+
+
+
+
+              </div>
+
+
+
+
+
+
+
+              <div class="col-2"></div>
+
+
+
+
+
+
+
+          </div>
+      </div>
+
+
+
+
+
+
+
+
+
+      
+
+
+
+
+    <div class="alert alert-primary text-light " role="alert"
+    style="background-color:darkcyan;  text-align: center;">
+    <h3>Butun Kitablar</h3>
+
+
+    <div class="your-class p-0 m-0">
+      <div class="items"><img src="{{ url_for('static' , filename='images/Inkognito.png') }}" alt=""></div>
+      <div class="items"><img src="{{ url_for('static' , filename='images/56586_6f66e_1619754763.jpg') }}" alt=""></div>
+      <div class="items"><img src="{{ url_for('static' , filename='images/312861_0d6fa_1538476516.jpg') }}" alt=""></div>
+      <div class="items"><img src="{{ url_for('static' , filename='images/Inkognito.png') }}" alt=""></div>
+      <div class="items"><img src="{{ url_for('static' , filename='images/56586_6f66e_1619754763.jpg') }}" alt=""></div>
+      <div class="items"><img src="{{ url_for('static' , filename='images/312861_0d6fa_1538476516.jpg') }}" alt=""></div>
+      <div class="items"><img src="{{ url_for('static' , filename='images/Inkognito.png') }}" alt=""></div>
+      <div class="items"><img src="{{ url_for('static' , filename='images/56586_6f66e_1619754763.jpg') }}" alt=""></div>
+      <div class="items"><img src="{{ url_for('static' , filename='images/312861_0d6fa_1538476516.jpg') }}" alt=""></div>
+      <div class="items"><img src="{{ url_for('static' , filename='images/Inkognito.png') }}" alt=""></div>
+      <div class="items"><img src="{{ url_for('static' , filename='images/56586_6f66e_1619754763.jpg') }}" alt=""></div>
+      <div class="items"><img src="{{ url_for('static' , filename='images/312861_0d6fa_1538476516.jpg') }}" alt=""></div>
+    </div>
+
+  
+        2020@Butun haqlar qorunur
+      </div>
+
+
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='slick-1.8.1/slick-1.8.1/slick/slick.min.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
+    <script>
+
+      
+    $(document).ready(function(){
+      $('.your-class').slick({
+        centerMode: true,
+        centerPadding: '100px',
+        slidesToShow: 5,
+        responsive: [
+      { 
+      breakpoint: 768,
+      settings: {
+        arrows: false,
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 3
+      }
+      },
+      {
+      breakpoint: 480,
+      settings: {
+        arrows: false,
+        centerMode: true,
+        centerPadding: '40px',
+        slidesToShow: 1
+      }
+    }
+  ]
+        
+      });
+    });
+
+
+    </script>
+
+
+
+
+      <script src="{{ url_for('static', filename='Main.js') }}"></script>
+
+  </body>
+
+  </html>
